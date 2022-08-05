@@ -3,7 +3,6 @@ import { AggregatedBalanceByGradeDataModel } from "./constants";
 import { LoanDataFilterState } from "../../components/LoanDataFilter";
 
 export const calculateAggregateBalanceFromLoanSizeData = (loanSizeData: LoanSizeDataModel[], filters?: LoanDataFilterState): AggregatedBalanceByGradeDataModel => {
-    console.log("calculating aggregate balances...")
     const aggregateBalancesByGrade = loanSizeData.reduce<AggregatedBalanceByGradeDataModel>((acc, { grade, currentBalance, homeOwnership, term, year, quarter }) => {
         if (!grade) return acc;
         if (filters) {

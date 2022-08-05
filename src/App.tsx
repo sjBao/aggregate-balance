@@ -1,51 +1,11 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
-import { AggregateBalanceTable, AggregatedBalanceByGradeDataModel } from './components/AggregateBalanceTable'
-import { LoanDataFilter, LoanDataFilterState } from './components/LoanDataFilter'
+import { AggregateBalanceBarGraph } from './components/AggregateBalanceBarGraph'
+import { AggregateBalanceTable, calculateAggregateBalanceFromLoanSizeData } from './components/AggregateBalanceTable'
+import { getFilterOptionsFromLoanSizeData, LoanDataFilter, LoanDataFilterState } from './components/LoanDataFilter'
 import { getData, LoanSizeDataModel } from './request/api'
+
 import './App.css'
-
-const getFilterOptionsFromLoanSizeData = (loanSizeData: LoanSizeDataModel[]) => {
-  console.log("getting filter options...")
-
-  const homeOwnerships = new Set<string>();
-  const terms = new Set<string>();
-  const years = new Set<string>();
-  const quarters = new Set<string>();
-
-  loanSizeData.forEach(({ homeOwnership, term, year, quarter }) => {
-    if (homeOwnership) homeOwnerships.add(homeOwnership);
-    if (term) terms.add(term);
-    if (year) years.add(year);
-    if (quarter) quarters.add(quarter);
-  });
-
-  return {
-    homeOwnerships: [...homeOwnerships],
-    terms: [...terms],
-    years: [...years],
-    quarters: [...quarters]
-  }
-}
-
-const calculateAggregateBalanceFromLoanSizeData = (loanSizeData: LoanSizeDataModel[], filters?: LoanDataFilterState): AggregatedBalanceByGradeDataModel => {
-  console.log("calculating aggregate balances...")
-  const aggregateBalancesByGrade = loanSizeData.reduce<AggregatedBalanceByGradeDataModel>((acc, { grade, currentBalance, homeOwnership, term, year, quarter }) => {
-    if (!grade) return acc;
-    if (filters) {
-      if (filters.homeOwnerships && filters.homeOwnerships !== homeOwnership) return acc;
-      if (filters.terms && filters.terms !== term) return acc;
-      if (filters.years && filters.years !== year) return acc;
-      if (filters.quarters && filters.quarters !== quarter) return acc;
-    }
-
-    acc[grade] = acc[grade] ? acc[grade] + parseFloat(currentBalance) : parseFloat(currentBalance);
-    return acc;
-  }, {});
-
-  return aggregateBalancesByGrade;
-}
-
 
 function App() {
   // Fetch data from API and cache it in the state on startup
@@ -93,8 +53,6 @@ function App() {
     [filterSelections.homeOwnerships, filterSelections.terms, filterSelections.years, filterSelections.quarters, loanSizeData.length]
   );
 
-  console.log(filterSelections);
-
   return (
     <div className="App">
       <AggregateBalanceTable
@@ -104,7 +62,8 @@ function App() {
       <LoanDataFilter filters={filterOptions} handleFilterChange={handleFilterChange} />
       <button onClick={handleFilterReset}>Reset</button>
       <hr />
-      
+
+      <AggregateBalanceBarGraph data={aggregateBalancesByGrade} />
     </div>
   )
 }
