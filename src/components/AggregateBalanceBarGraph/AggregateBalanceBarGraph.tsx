@@ -25,17 +25,15 @@ export const AggregateBalanceBarGraph = ({ data }: AggregateBalanceBarGraphProps
             margin={{
                 top: 5,
                 right: 30,
-                left: 20,
+                left: 30,
                 bottom: 5,
             }}
         >
-            <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="grade" />
-            <YAxis />
+            <YAxis tickFormatter={(totalBalance) => `$${totalBalance}`}  />
             <Tooltip />
             <Legend />
-            <Bar dataKey="value" fill="#8884d8" />
-            <Bar dataKey="uv" fill="#82ca9d" />
+            <Bar dataKey="value" fill="#8884d8" name="Grade"/>
         </BarChart>
     );
 }

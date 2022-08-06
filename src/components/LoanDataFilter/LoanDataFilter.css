@@ -1,0 +1,9 @@
+.loan-data-filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.loan-data-filters__select {
+    width: 100%;
+}

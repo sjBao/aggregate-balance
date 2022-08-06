@@ -1,0 +1,50 @@
+.aggregate-balance-table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.aggregate-balance-table__head {
+    border: 2px solid #e6e6e6;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.aggregate-balance-table__head-cell {
+    padding: 0.5rem;
+    text-align: center;
+    font-weight: bold;
+    border-right: 1px solid #e6e6e6;
+
+}
+
+.aggregate-balance-table__head-cell:last-child {
+    border-right: none;
+}
+
+.aggregate-balance-table__body {
+    border-left: 2px solid #e6e6e6;
+    border-right: 2px solid #e6e6e6;
+}
+
+.aggregate-balance-table__body-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.aggregate-balance-table__body-row:last-child {
+    border-bottom: 2px solid #e6e6e6;
+}
+
+.aggregate-balance-table__body-cell {
+    border-right: #e6e6e6 1px solid;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.aggregate-balance-table__body-cell:last-child {
+    border-right: none;
+}

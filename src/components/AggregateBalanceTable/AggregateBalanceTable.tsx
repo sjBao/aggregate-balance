@@ -1,6 +1,9 @@
 import React from 'react';
 import { AggregatedBalanceByGradeDataModel } from './constants';
 
+import './AggregateBalanceTable.css';
+import { formatToUSD } from './helpers';
+
 type AggregateBalanceTableProps = {
     data: AggregatedBalanceByGradeDataModel;
 }
@@ -15,22 +18,22 @@ export const AggregateBalanceTable = ({
                 {
                     Object.keys(data).map(grade => (
                         <div key={grade} className="aggregate-balance-table__head-cell">
-                            {grade}
+                            Grade {grade}
                         </div>
                     ))
                 }
             </div>
 
             <div className="aggregate-balance-table__body">
-                {
-                    Object.values(data).map((balance, index) => (
-                        <div key={index} className="aggregate-balance-table__body-row">
-                            <div className="aggregate-balance-table__body-cell">
-                                ${balance.toFixed(2)}
+                <div className="aggregate-balance-table__body-row">
+                    {
+                        Object.values(data).map((balance, index) => (
+                            <div key={index} className="aggregate-balance-table__body-cell">
+                                {formatToUSD(balance)}
                             </div>
-                        </div>
-                    ))
-                }
+                        ))
+                    }
+                </div>
             </div>
         </div>
     )

@@ -58,7 +58,6 @@ function App() {
       <AggregateBalanceTable
         data={aggregateBalancesByGrade}
       />
-      <hr />
       <LoanDataFilter filters={filterOptions} handleFilterChange={handleFilterChange} />
       <button onClick={handleFilterReset}>Reset</button>
       <hr />

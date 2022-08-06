@@ -18,3 +18,5 @@ export const calculateAggregateBalanceFromLoanSizeData = (loanSizeData: LoanSize
 
     return aggregateBalancesByGrade;
 }
+
+export const formatToUSD = new Intl.NumberFormat('en-US', {currency: 'USD', style: 'currency'}).format;

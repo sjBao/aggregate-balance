@@ -1,5 +1,8 @@
 import React from 'react';
 import { LoanDataFilterKeys, LoanDataFilterTypes } from './constants';
+import { Select } from '../../molecules/Select';
+
+import './LoanDataFilter.css';
 
 type LoanDataFilterProps = {
     filters: LoanDataFilterTypes;
@@ -16,14 +19,10 @@ export const LoanDataFilter = ({ filters, handleFilterChange }: LoanDataFilterPr
             {
                 Object.keys(filters).map((key) => (
                     <div key={key} className="loan-data-filters__select">
-                        <select name={key} onChange={handleChange} defaultValue="">
-                            <option value=""> -- select an option -- </option>
-                            {
-                                (filters[key as LoanDataFilterKeys] || []).map(value => (
-                                    <option key={value} value={value}>{value}</option>
-                                ))
-                            }
-                        </select>
+                        <Select options={(filters[key as LoanDataFilterKeys] || []).map(filterValue => ({
+                            name: filterValue,
+                            value: filterValue
+                        }))} />
                     </div>
                 ))
             }
