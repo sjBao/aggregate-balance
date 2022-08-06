@@ -1,26 +1,69 @@
-import React, { MouseEventHandler, ReactEventHandler, useState } from 'react';
+import React, { useState, useEffect, useRef, ReactEventHandler } from 'react';
 import './Select.css';
 
-type SelectOption = {
+export type SelectOption = {
     name: string;
     value: string;
 }
 
-type SelectProps = {
-    options: SelectOption[];
+export type DV01SelectEvent = {
+    name: string;
+    selectedOption: SelectOption;
 }
 
-export const Select = ({ options }: SelectProps) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(options[0]);
+type SelectProps = {
+    name: string;
+    onChange(event: DV01SelectEvent): void;
+    options: SelectOption[];
+    value?: string;
+}
 
-    const toggleSelectOpen = () => {
+const DEFAULT_SELECTION = { name: '', value: '' };
+
+export const Select = ({ name, options, onChange, value }: SelectProps) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedOptionIndex, setSelectedOptionIndex] = useState<number>(-1);
+    const valueRef = useRef(value);
+
+    if (valueRef.current !== value) {
+        valueRef.current = value;
+        setSelectedOptionIndex(options.findIndex(option => option.value === value));
+    }
+
+    const toggleSelectOpen: React.MouseEventHandler<HTMLDivElement> = (e) => {
+        e.nativeEvent.stopImmediatePropagation();
         setIsOpen((prevState) => !prevState);
     }
 
-    const handleSelect: React.MouseEventHandler<HTMLDivElement> = (event) => {
-        console.log(event.target);
+    const closeSelectMenu = () => {
+        if (isOpen) setIsOpen(false);
     }
+
+    const handleSelect: React.MouseEventHandler<HTMLDivElement> = (event) => {
+        const { dataset: { index } } = event.target as HTMLDivElement;
+        setSelectedOptionIndex(parseInt(index || "-1"));
+
+        setIsOpen(false);
+    }
+
+    useEffect(() => {
+        document.addEventListener('click', closeSelectMenu);
+        return () => {
+            document.removeEventListener('click', closeSelectMenu);
+        }
+    })
+
+    useEffect(() => {
+        const selectedOption = options[selectedOptionIndex];
+
+        if (selectedOptionIndex > -1 && selectedOption) {
+            onChange({ name, selectedOption });
+        } else {
+            value && onChange({ name, selectedOption: DEFAULT_SELECTION });
+        }
+    }, [selectedOptionIndex])
+
+    const selectedOption = options[selectedOptionIndex];
 
     return (
         <div className={`dv01-select${isOpen ? ' open' : ''}`}>
@@ -34,8 +77,13 @@ export const Select = ({ options }: SelectProps) => {
             </div>
             <div className="dv01-select__overlay">
                 {
-                    options.map(option => (
-                        <div key={option.value} className="dv01-select__option" onClick={handleSelect}>
+                    options.map((option, index) => (
+                        <div
+                            data-index={index}
+                            className="dv01-select__option"
+                            key={option.value}
+                            onClick={handleSelect}
+                        >
                             {option.name}
                         </div>
                     ))

@@ -24,6 +24,7 @@ function App() {
     } catch (error) {
       // log to splunk or something
       console.error("Error fetching data", error);
+      setLoanSizeData([]);
     }
   }
 
@@ -48,8 +49,8 @@ function App() {
   }, [])
 
   const filterOptions = useMemo(() => getFilterOptionsFromLoanSizeData(loanSizeData), [loanSizeData.length])
-  const aggregateBalancesByGrade = useMemo(() => 
-    calculateAggregateBalanceFromLoanSizeData(loanSizeData, filterSelections), 
+  const aggregateBalancesByGrade = useMemo(() =>
+    calculateAggregateBalanceFromLoanSizeData(loanSizeData, filterSelections),
     [filterSelections.homeOwnerships, filterSelections.terms, filterSelections.years, filterSelections.quarters, loanSizeData.length]
   );
 
@@ -58,7 +59,11 @@ function App() {
       <AggregateBalanceTable
         data={aggregateBalancesByGrade}
       />
-      <LoanDataFilter filters={filterOptions} handleFilterChange={handleFilterChange} />
+      <LoanDataFilter 
+        filters={filterOptions} 
+        handleFilterChange={handleFilterChange}
+        filterSelections={filterSelections}
+      />
       <button onClick={handleFilterReset}>Reset</button>
       <hr />
 

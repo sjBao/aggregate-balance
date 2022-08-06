@@ -1,17 +1,19 @@
 import React from 'react';
-import { LoanDataFilterKeys, LoanDataFilterTypes } from './constants';
-import { Select } from '../../molecules/Select';
+import { LoanDataFilterKeys, LoanDataFilterTypes, LoanDataFilterState } from './constants';
+import { Select, DV01SelectEvent } from '../../molecules/Select';
 
 import './LoanDataFilter.css';
 
 type LoanDataFilterProps = {
     filters: LoanDataFilterTypes;
     handleFilterChange(arg: { name: string; value: string }): void;
+    filterSelections: LoanDataFilterState;
 }
 
-export const LoanDataFilter = ({ filters, handleFilterChange }: LoanDataFilterProps) => {
-    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        handleFilterChange({ name: event.target.name, value: event.target.value });
+export const LoanDataFilter = ({ filters, handleFilterChange, filterSelections }: LoanDataFilterProps) => {
+    const handleChange = (selection: DV01SelectEvent) => {
+        const { name, selectedOption } = selection;
+        handleFilterChange({ name, value: selectedOption.value });
     }
 
     return (
@@ -19,10 +21,15 @@ export const LoanDataFilter = ({ filters, handleFilterChange }: LoanDataFilterPr
             {
                 Object.keys(filters).map((key) => (
                     <div key={key} className="loan-data-filters__select">
-                        <Select options={(filters[key as LoanDataFilterKeys] || []).map(filterValue => ({
-                            name: filterValue,
-                            value: filterValue
-                        }))} />
+                        <Select
+                            name={key}
+                            value={filterSelections[key as LoanDataFilterKeys]}
+                            onChange={handleChange}
+                            options={(filters[key as LoanDataFilterKeys] || []).map(filterValue => ({
+                                name: filterValue,
+                                value: filterValue
+                            }))}
+                        />
                     </div>
                 ))
             }
