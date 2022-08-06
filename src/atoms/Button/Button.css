@@ -1,0 +1,27 @@
+.dv01-button {
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.1s ease-out;
+}
+
+.dv01-button.primary:active, .dv01-button.secondary:active {
+    background-color: rgb(188, 186, 233);
+    transform: translateY(2px);
+}
+
+.dv01-button.primary {
+    background-color: rgb(136, 132, 216);
+    border: none;
+    color: #fff;
+}
+
+.dv01-button.secondary {
+    border: 1px solid rgb(136, 132, 216);
+    color: rgb(136, 132, 216);
+}
+
+

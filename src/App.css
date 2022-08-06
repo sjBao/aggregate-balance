@@ -1,4 +1,5 @@
 .App {
+  margin: 0 1rem;
   text-align: center;
   padding-top: 100px; 
 }
@@ -98,4 +99,20 @@ input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
+}
+
+.App__reset-button {
+  margin-left: 1rem;
+}
+
+.App__menu-container {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  margin-bottom: 2rem;
+}
+
+.App__bar-graph-container {
+  box-sizing: border-box;
+  padding: 1rem 0;
+  border: 1px solid #e6e6e6;
 }

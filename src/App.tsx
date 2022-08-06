@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { AggregateBalanceBarGraph } from './components/AggregateBalanceBarGraph'
 import { AggregateBalanceTable, calculateAggregateBalanceFromLoanSizeData } from './components/AggregateBalanceTable'
 import { getFilterOptionsFromLoanSizeData, LoanDataFilter, LoanDataFilterState } from './components/LoanDataFilter'
+import { Button } from './atoms/Button'
 import { getData, LoanSizeDataModel } from './request/api'
 
 import './App.css'
@@ -59,15 +60,25 @@ function App() {
       <AggregateBalanceTable
         data={aggregateBalancesByGrade}
       />
-      <LoanDataFilter 
-        filters={filterOptions} 
-        handleFilterChange={handleFilterChange}
-        filterSelections={filterSelections}
-      />
-      <button onClick={handleFilterReset}>Reset</button>
-      <hr />
 
-      <AggregateBalanceBarGraph data={aggregateBalancesByGrade} />
+      <div className="App__menu-container">
+        <LoanDataFilter
+          filters={filterOptions}
+          handleFilterChange={handleFilterChange}
+          filterSelections={filterSelections}
+        />
+        <Button
+          className="App__reset-button"
+          secondary
+          onClick={handleFilterReset} >
+          Reset
+        </Button>
+      </div>
+
+      <div className="App__bar-graph-container">
+        <AggregateBalanceBarGraph data={aggregateBalancesByGrade} />
+      </div>
+
     </div>
   )
 }

@@ -14,27 +14,36 @@ export const AggregateBalanceTable = ({
 
     return (
         <div className='aggregate-balance-table'>
-            <div className="aggregate-balance-table__head">
-                {
-                    Object.keys(data).map(grade => (
-                        <div key={grade} className="aggregate-balance-table__head-cell">
-                            Grade {grade}
+            {
+                Object.keys(data).length ? (
+                    <>
+                        <div className="aggregate-balance-table__head">
+                            {
+                                Object.keys(data).map(grade => (
+                                    <div key={grade} className="aggregate-balance-table__head-cell">
+                                        Grade {grade}
+                                    </div>
+                                ))
+                            }
                         </div>
-                    ))
-                }
-            </div>
 
-            <div className="aggregate-balance-table__body">
-                <div className="aggregate-balance-table__body-row">
-                    {
-                        Object.values(data).map((balance, index) => (
-                            <div key={index} className="aggregate-balance-table__body-cell">
-                                {formatToUSD(balance)}
+                        <div className="aggregate-balance-table__body">
+                            <div className="aggregate-balance-table__body-row">
+                                {
+                                    Object.values(data).map((balance, index) => (
+                                        <div key={index} className="aggregate-balance-table__body-cell">
+                                            {formatToUSD(balance)}
+                                        </div>
+                                    ))
+                                }
                             </div>
-                        ))
-                    }
-                </div>
-            </div>
+                        </div>
+                    </>)
+                    :
+                    <div className="aggregate-balance-table__no-data">
+                        No data...
+                    </div>
+            }
         </div>
     )
 }
