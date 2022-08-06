@@ -14,9 +14,9 @@ export const getFilterOptionsFromLoanSizeData = (loanSizeData: LoanSizeDataModel
   });
 
   return {
-    homeOwnerships: [...homeOwnerships],
-    terms: [...terms],
-    years: [...years],
-    quarters: [...quarters]
+    homeOwnerships: [...homeOwnerships].sort((a, b) => a.localeCompare(b)),
+    terms: [...terms].sort((a, b) => a.localeCompare(b)),
+    years: [...years].sort((a, b) => a.localeCompare(b)),
+    quarters: [...quarters].sort((a, b) => a.localeCompare(b))
   }
 }
