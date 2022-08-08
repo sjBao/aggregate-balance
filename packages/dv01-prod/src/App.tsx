@@ -4,7 +4,7 @@ import { AggregateBalanceBarGraph } from './components/AggregateBalanceBarGraph'
 import { AggregateBalanceTable, calculateAggregateBalanceFromLoanSizeData } from './components/AggregateBalanceTable'
 import { getFilterOptionsFromLoanSizeData, LoanDataFilter, LoanDataFilterState } from './components/LoanDataFilter'
 import { Button } from './atoms/Button'
-import { getData, LoanSizeDataModel } from './request/api'
+import { getData, LoanSizeDataModel } from 'dv01_api/loan-data';
 
 import './App.css'
 
@@ -21,7 +21,6 @@ function App() {
   const getLoanSizeData = async () => {
     try {
       const data = await getData();
-      console.log(data);
       setLoanSizeData(data);
     } catch (error) {
       // log to splunk or something

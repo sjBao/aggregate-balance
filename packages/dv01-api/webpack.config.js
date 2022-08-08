@@ -24,6 +24,14 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: './public/index.html'
-		})
+		}),
+
+        new ModuleFederationPlugin({
+            name: "dv01_api",
+            filename: "remoteEntry.js",
+            exposes: {
+                "./loan-data": "./src/bootstrap.js"
+            }
+        })
 	]
 }

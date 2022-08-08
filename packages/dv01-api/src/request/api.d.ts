@@ -7,5 +7,4 @@ export interface LoanSizeDataModel {
     year: string;
   }
 
-
 export const getData: () => Promise<LoanSizeDataModel[]>
