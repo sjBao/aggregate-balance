@@ -54,6 +54,7 @@ module.exports = {
       filename: "remoteEntry.js",
       remotes: {
         dv01_api: "dv01_api@http://localhost:8081/remoteEntry.js",
+        dv01_solar: "dv01_solar@http://localhost:8082/remoteEntry.js",
       },
       shared: {
         ...deps,

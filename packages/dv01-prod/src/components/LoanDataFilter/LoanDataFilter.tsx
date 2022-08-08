@@ -1,6 +1,6 @@
 import React from 'react';
 import { LoanDataFilterKeys, LoanDataFilterTypes, LoanDataFilterState } from './constants';
-import { Select, DV01SelectEvent } from '../../molecules/Select';
+import { Select, DV01SelectEvent } from 'dv01_solar/components';
 
 import './LoanDataFilter.css';
 
