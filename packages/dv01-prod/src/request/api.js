@@ -1,9 +1,9 @@
 import Papa from 'papaparse'
-import rawData from './loansize.csv'
 
 const parseData = (result, rawData) => {
   result.data.splice(0, 2)
   const { data } = result
+
   for (let i = 0; i < data.length; i += 1) {
     const year = data[i][0]
     const quarter = data[i][1]
@@ -25,10 +25,11 @@ const parseData = (result, rawData) => {
 }
 
 export const getData = async () => {
-  const csvData = await fetch(rawData).then((response) => {
-    return response.text()
-  })
+  const {default: csvData} = await import('./loansize.csv');
   const data = []
+
+  console.log(csvData);
+
   await Papa.parse(csvData, {
     complete: (result) => parseData(result, data),
   })

@@ -49,7 +49,7 @@ export const AggregateBalanceBarGraph = ({ data }: AggregateBalanceBarGraphProps
     );
 }
 
-const AggregateBalanceTooltip = ({ payload }: TooltipProps) => {
+const AggregateBalanceTooltip = ({ payload }: any) => {
     if (payload && payload.length) {
         const value = payload[0].payload.value || '';
         const grade = payload[0].payload.grade || '';
@@ -59,5 +59,9 @@ const AggregateBalanceTooltip = ({ payload }: TooltipProps) => {
                 <p className='aggregate-balance-bar-graph__tooltip-value'>{formatToUSD(value)}</p>
             </div>
         );
+    } else {
+        return null;
     }
+
+    
 }

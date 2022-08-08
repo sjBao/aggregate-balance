@@ -21,6 +21,7 @@ function App() {
   const getLoanSizeData = async () => {
     try {
       const data = await getData();
+      console.log(data);
       setLoanSizeData(data);
     } catch (error) {
       // log to splunk or something
