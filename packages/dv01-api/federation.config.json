@@ -1,0 +1,6 @@
+{
+    "name": "dv01_api",
+    "exposes": {
+        "./loan-data": "./src/bootstrap.js"
+    }
+}

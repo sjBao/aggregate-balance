@@ -1,6 +1,8 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
+const federationConfig = require("./federation.config");
+
 module.exports = {
 	mode: 'development',
 	devServer: {
@@ -27,11 +29,8 @@ module.exports = {
 		}),
 
         new ModuleFederationPlugin({
-            name: "dv01_api",
-            filename: "remoteEntry.js",
-            exposes: {
-                "./loan-data": "./src/bootstrap.js"
-            }
+            ...federationConfig,
+            filename: "remoteEntry.js"
         })
 	]
 }

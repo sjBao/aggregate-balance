@@ -1,6 +1,8 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
+const federationConfig = require("./federation.config");
+
 module.exports = {
     mode: 'development',
     devServer: {
@@ -41,11 +43,8 @@ module.exports = {
         }),
 
         new ModuleFederationPlugin({
-            name: "dv01_solar",
+            ...federationConfig,
             filename: "remoteEntry.js",
-            exposes: {
-                "./components": "./src/bootstrap.tsx"
-            },
             shared: {
                 react: {
                     singleton: true
