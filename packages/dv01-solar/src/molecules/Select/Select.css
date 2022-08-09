@@ -1,0 +1,48 @@
+.dv01-select {
+    position: relative;
+    width: 100%;
+}
+
+.dv01-select__label {
+    border: 1px solid #e6e6e6;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+
+.dv01-select .dv01-select__chevron {
+    transition: 0.3s;
+    transform: rotate(-90deg);
+}
+
+.dv01-select.open .dv01-select__chevron {
+    transform: rotate(0deg);
+}
+
+.dv01-select__overlay {
+    display: none;
+    position: absolute;
+    width: 100%;
+    z-index: 99;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+    border: 1px solid #e6e6e6;
+}
+
+.dv01-select.open .dv01-select__overlay {
+    display: block;
+}
+
+.dv01-select__option {
+    cursor: pointer;
+    background-color: #fff;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.dv01-select__option:hover {
+    background-color: rgb(136, 132, 216);
+    color: #fff;   
+}
