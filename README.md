@@ -32,7 +32,7 @@ With the exception of `dv01-prod`, every other package can be run stand alone.
 - eslint + prettier
 
 ### How long this took me:
-- [release-1](https://github.com/sjBao/aggregate-balance/tree/release-1) on and off, took me about about 3.5 hours.
+- [release-1](https://github.com/sjBao/aggregate-balance/pull/3) on and off, took me about about 3.5 hours.
     - prototype about 1.5 hour
     - refactored `Button` and `Select` to custom component - about 1 hour
     - styling - about 1 hour
