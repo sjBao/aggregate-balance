@@ -1,5 +1,8 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const WebpackRemoteTypesPlugin = require("webpack-remote-types-plugin").default;
+
+
 
 const deps = require("./package.json").dependencies;
 module.exports = {
@@ -67,6 +70,13 @@ module.exports = {
           requiredVersion: deps["react-dom"],
         },
       },
+    }),
+    new WebpackRemoteTypesPlugin({
+      remotes: {
+        dv01_solar: "dv01_solar@http://localhost:8082/remoteEntry.js",
+      },
+      outputDir: 'types',
+      remoteFileName: '[name]-dts.tgz'
     }),
     new HtmlWebPackPlugin({
       template: "./public/index.html",

@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import { Button } from 'dv01_solar/Button';
+import { getData, LoanSizeDataModel } from 'dv01_api/loan-data';
 
 import { AggregateBalanceBarGraph } from './components/AggregateBalanceBarGraph'
 import { AggregateBalanceTable, calculateAggregateBalanceFromLoanSizeData } from './components/AggregateBalanceTable'
 import { getFilterOptionsFromLoanSizeData, LoanDataFilter, LoanDataFilterState } from './components/LoanDataFilter'
-import { Button } from 'dv01_solar/components';
-import { getData, LoanSizeDataModel } from 'dv01_api/loan-data';
 
 import './App.css'
 
