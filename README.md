@@ -32,9 +32,10 @@ With the exception of `dv01-prod`, every other package can be run stand alone.
 - eslint + prettier
 
 ### How long this took me:
-- [release-1](https://github.com/sjBao/aggregate-balance/tree/release-1) on and off, took me about about 2.5 hours.
-- [release-2-micro-services](https://github.com/sjBao/aggregate-balance/tree/release-2-micro-services) on and off, took me an additional 6-8 hours
+- [release-1](https://github.com/sjBao/aggregate-balance/tree/release-1) on and off, took me about about 3.5 hours.
+    - prototype about 1.5 hour
     - refactored `Button` and `Select` to custom component - about 1 hour
     - styling - about 1 hour
+- [release-2-micro-services](https://github.com/sjBao/aggregate-balance) on and off, took me an additional 5-7 hours
     - remove `CRA` and implement mfe-architecture - the rest of the time
     - I hope the extra effort I put helps this project stand out 😅
